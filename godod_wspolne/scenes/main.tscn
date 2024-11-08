@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dacshipt7rrhr"]
 
-[ext_resource type="Script" path="res://scenes/camera_2d.gd" id="1_jj0nt"]
+[ext_resource type="Script" path="res://scripts/camera_2d.gd" id="1_jj0nt"]
 [ext_resource type="PackedScene" uid="uid://bc3xmktd4ajxn" path="res://scenes/terra.tscn" id="2_xo7lx"]
 
 [node name="Node2D" type="Node2D"]

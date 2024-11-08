@@ -2,12 +2,14 @@ extends TileMapLayer
 
 var height = FastNoiseLite.new()
 var seed = randi()
-var width = 500
+var width = 10
 var rng
+var part_size = 100
 
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
+	width *= part_size
 	height.seed = seed
 	rng = RandomNumberGenerator.new()
 	rng.randomize() 
@@ -18,7 +20,6 @@ func _ready() -> void:
 	generate_curve()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 	
@@ -26,11 +27,11 @@ func generate_curve() -> void:
 	var heights = []
 	heights.resize(width)
 	heights.fill(30)
-	for i in range(width-1):
-		if i % 2 == 0:
-			heights[i] = 30 + int(rng.randfn(10, 5))
-		else:
-			heights[i] = (heights[i-1] + heights[i+1])/2
+	for i in range(0,width,part_size):
+		var rnd_value = int(rng.randfn(0, 10))
+		for j in range(part_size):
+			heights[i+j] = 30 + rnd_value
+
 			
 	for x in range(width):
 			for y in range(heights[x]):
