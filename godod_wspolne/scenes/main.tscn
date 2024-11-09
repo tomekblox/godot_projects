@@ -7,8 +7,8 @@
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(938, 776)
-zoom = Vector2(0.3, 0.3)
+zoom = Vector2(0.1, 0.1)
 script = ExtResource("1_jj0nt")
 
 [node name="TileMapLayer" parent="." instance=ExtResource("2_xo7lx")]
-position = Vector2(87, 1286)
+position = Vector2(-4514, 3797)
