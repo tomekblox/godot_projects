@@ -42,18 +42,19 @@ func generate_curve() -> void:
 	var heights = []
 	heights.resize(width)
 	heights.fill(sea_level)
+	var rnd_value = 0 
 	for i in range(0,width,part_size):
-		var rnd_value = int(rng.randfn(0, 10))  # random change - standard deviation
 		for j in range(part_size):
-			if randf() < 0.95:
+			if randf() < 0.96:
 				heights[i+j] += rnd_value
 			else:
-				rnd_value += int(rng.randfn(0,10))
+				rnd_value += int(rng.randfn(0,10)) # random change - standard deviation
+				heights[i+j] += rnd_value
 				
 	for x in range(width):
 			for y in range(heights[x]):
 				set_cell(Vector2i(x,-y),0,Vector2i(2,1))  #creating tiles
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(1.0).timeout
 
 
 	var temp_heights = heights.duplicate(true)
@@ -62,8 +63,15 @@ func generate_curve() -> void:
 		heights[i] = gaus.call(temp_heights,i,linear,1,[0.1]) # tab,start_index,type,start_weight,change
 
 	clear()
-	for x in range(width):
+	for x in range(1,width-1):
+		if not(heights[x] - heights[x-1] < 1 or heights[x] - heights[x+1] < 1): #pojedyńcze wystające
+			heights[x] -=1
+		if  not(heights[x] - heights[x-1] < 1 and heights[x] - heights[x+1] < 1): # zmiana wysokości
+			pass
+		if heights[x] < heights[x-1] and heights[x] < heights[x+1]: # pojedyńcza dziura
+			heights[x] += 1
 		for y in range(heights[x]):
+			#set_cell(Vector2i(x,-y),0,Vector2i(0,2))
 			set_cell(Vector2i(x,-y),0,Vector2i(2,1))
 
 	print("done")
