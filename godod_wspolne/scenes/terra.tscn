@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bc3xmktd4ajxn"]
+[gd_scene load_steps=5 format=4 uid="uid://bc3xmktd4ajxn"]
 
 [ext_resource type="Script" path="res://scripts/terra.gd" id="1_pkrb7"]
 [ext_resource type="Texture2D" uid="uid://cs4o0x00ufdcc" path="res://resources/tiles.png" id="1_wx76k"]
@@ -27,5 +27,6 @@ sources/0 = SubResource("TileSetAtlasSource_luvbm")
 
 [node name="TileMapLayer" type="TileMapLayer"]
 position = Vector2(0, 1000)
+tile_map_data = PackedByteArray("AAACAPn/AAACAAAAAAAEAPn/AAACAAAAAAAFAPn/AAACAAAAAAAGAPn/AAACAAAAAAAGAPr/AAACAAAAAAAFAPr/AAAAAAAAAAAEAPr/AAAAAAAAAAADAPr/AAACAAAAAAADAPn/AAACAAAAAAADAPj/AAACAAAAAAAEAPj/AAACAAAAAAAFAPj/AAACAAAAAAAEAPf/AAACAAAAAAAFAPf/AAACAAAAAAAGAPf/AAACAAAAAAAGAPj/AAACAAAAAAB5AIf/AAACAAAAAAADAPv/AAAAAAAAAAAEAPv/AAAAAAAAAAAFAPv/AAAAAAAAAAAFAPz/AAAAAAAAAAAEAPz/AAAAAAAAAAADAPz/AAAAAAAAAAAEAP3/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_d33eo")
 script = ExtResource("1_pkrb7")

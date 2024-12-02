@@ -26,6 +26,17 @@ var gaus = func calc_gaus(tab,start_index,type,start_weight,change=[]):
 		return int(result/(i+1))
 	else:
 		return 0
+		
+		
+func generate_tree(start_x,start_y) -> void:
+	var top
+	for y in range(randi_range(5,9)):
+		set_cell(Vector2i(start_x , start_y - y),0,Vector2i(1,0)) # dodać gałęzie
+		top = start_y - y
+		
+	for i in range(-1,2,1):
+		for j in range(-1,2,1):
+			set_cell(Vector2i(start_x+i , top+j),0,Vector2i(3,1)) #leaves
 
 func _ready() -> void:
 	width *= part_size
@@ -53,14 +64,19 @@ func generate_curve() -> void:
 				
 	for x in range(width):
 			for y in range(heights[x]):
-				set_cell(Vector2i(x,-y),0,Vector2i(2,1))  #creating tiles
-	await get_tree().create_timer(1.0).timeout
+				set_cell(Vector2i(x,-y),0,Vector2i(0,0))  #creating tiles
+	await get_tree().create_timer(1.0).timeout                                # stop to see results
 
 
 	var temp_heights = heights.duplicate(true)
 	
 	for i in range(width):
 		heights[i] = gaus.call(temp_heights,i,linear,1,[0.1]) # tab,start_index,type,start_weight,change
+	temp_heights.clear()
+		
+	var nature = []
+	nature.resize(len(heights))
+	nature.fill(0)
 
 	clear()
 	for x in range(1,width-1):
@@ -70,8 +86,18 @@ func generate_curve() -> void:
 			pass
 		if heights[x] < heights[x-1] and heights[x] < heights[x+1]: # pojedyńcza dziura
 			heights[x] += 1
+			
+			
+			
+		if  heights[x] - heights[x-1] < 1 and heights[x] - heights[x+1] < 1:
+			if randf() > 0.93:
+					nature[x] = 1
+					set_cell(Vector2i(x,-heights[x]),0,Vector2i(1,0))
+					generate_tree(x,-heights[x])
 		for y in range(heights[x]):
-			#set_cell(Vector2i(x,-y),0,Vector2i(0,2))
-			set_cell(Vector2i(x,-y),0,Vector2i(2,1))
+			if  heights[x] - heights[x-1] < 1 and heights[x] - heights[x+1] < 1:
+				set_cell(Vector2i(x,-y),0,Vector2i(0,0))
+			else:
+				set_cell(Vector2i(x,-y),0,Vector2i(3,0))
 
 	print("done")
