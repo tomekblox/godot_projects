@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bamrcl2pav5gq"]
+
+[ext_resource type="Texture2D" uid="uid://4x01c1rfa2h" path="res://sources/pickaxe.png" id="1_7dx6q"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_ase7l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2hj6"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_ase7l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_7dx6q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_g2hj6")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
